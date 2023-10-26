@@ -139,3 +139,27 @@ select {
  ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 2px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1.2em;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 2px;
+  display: none;
+  overflow: hidden;
+  background-color: #555;
+}

@@ -8,7 +8,7 @@ RegisterCommand("setgroup", function(source, args)
 end)
 
 RegisterNetEvent('vrp_escadmin:abrirAdminG')
-AddEventHandler('vrp_escadmin:abrirAdminG',function(sgrupos, pgrupos, playerId)
+AddEventHandler('vrp_escadmin:abrirAdminG',function(sgrupos, pgrupos, playerId, categories)
     local itens = {
         pgrupos,
         sgrupos,
@@ -18,7 +18,8 @@ AddEventHandler('vrp_escadmin:abrirAdminG',function(sgrupos, pgrupos, playerId)
     SetNuiFocus(true,true)
       SendNUIMessage({
         conce = true,
-        data = itens
+        data = itens,
+        cats = categories
   })
 end)
 

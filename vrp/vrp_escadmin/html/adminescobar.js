@@ -8,7 +8,7 @@
         if ( item.conce == true ) {
             $('.container').css('display','block');
             $('.box').css('display','block');
-            criarLista(item.data)
+            criarLista(item.data, item.cats);
         } else if ( item.conce == false ) {
             $('.conteudo').html("");
             $('.container').css("display","none");
@@ -16,18 +16,46 @@
         } 
     })
     
-    function criarLista(data) {
-        document.getElementById("playerId").value = data[2].toString()
+    function criarLista(data, cats) {
+        document.getElementById("playerId").value = data[2].toString();
 
-        data[1].forEach( (item, key) => {
-            let div = `<div class='grupo' onClick='javasript:atribuir("${key}${item}")' id='${key}${item}' data-value='${item}'>${item}</div>`
-            $('#grupos').append(div)
+        const arr = Object.keys(cats);
+        arr.forEach( (item, key) => {
+            var divmain = `<button type='button' class='collapsible'>${item}</button>\n<div class="content"><p>`
+
+            data[1].forEach( (item2, key2) => {
+                item2["category"].forEach( (item3, key3) => {
+                    if (item3 == item) {
+                        divmain = divmain + `<div class='grupo' onClick='javasript:atribuir("${key2}${item2['group']}")' id='${key2}${item2['group']}' data-value='${item2['group']}'>${item2['group']}</div>`;
+                    }
+                })
+            })
+
+            divmain = divmain + "</p></div>";
+
+            $('#grupos').append(divmain)
         })
     
         data[0].forEach( (item, key) => {
             let div = `<div class='player' onClick='javasript:atribuir("${key}${item}")' id='${key}${item}' data-value='${item}'>${item}</div>`
             $('#escolhas').append(div)
         })
+
+
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
     }
     
     function atribuir(id) {
